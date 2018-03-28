@@ -12,7 +12,7 @@
   * 'Tools > Command Line Tool Support' Tool based on Symfony Console
 
 * External connections
-  * unchecked - Brreak at first line in PHP scripts
+  * unchecked - Break at first line in PHP scripts
 
 * VCRUNTIME140.dll 오류 
   * http://pentode.tistory.com/76
