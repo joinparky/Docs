@@ -1,0 +1,7 @@
+* phpstorm 은 intellij의 project > module 개념이 없음
+* project > module 개념은 여러개의 모듈을 하나의 프로젝트로 그룹화 할 수 있음
+* 장점은 module 별로 was를 따로 구동할 수 있음
+* 그러나 phpstorm은 각각 프로젝트를 만든 방법 밖에는 없음 
+* 소스를 참고하려면 작업하려는 메인프로젝트로 phpstorm을 열고 참고하려는 프로젝트를 메인프로젝트에 포함하여 열어야 함
+* 참고하려는 프로젝트의 설정(webserver, database, php version등)은 반영되지 않음
+
