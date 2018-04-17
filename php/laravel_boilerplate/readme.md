@@ -205,6 +205,55 @@
 
 ----
 
+* api_token
+  ```
+    ALTER TABLE users ADD `api_token` char(60) NULL;
+    CREATE UNIQUE INDEX users_api_token_uindex ON users (api_token);
+  ```
+
+* modify create user 
+  * App\Http\Controllers\Aut\RegisterController::create 
+  ```
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'api_token' => str_random(60),
+        ]);
+    }
+  ```
+
+* add route
+  * C:\Dev\workspace\obpark\kogic_report\routes\api.php
+  ```
+  Route::middleware('auth:api')->get('/report/{id}', 'ReportController@show')->where(['id' => '[0-9]+']);
+  ```
+
+* call url 
+  ```
+    $now = Carbon::now();
+    $directory = "report";
+    Storage::makeDirectory("public/".$directory, 'public');
+
+    $file = "report_".$id."_".$now->toAtomString().".pdf";
+    $filepath = storage_path('app/public/'.$directory)."/".$file;
+
+    $url = url("/api/report/".$id."?api_token=gZOtac7s2DePiNnqsq8EBZjwnlejbUm9ok3Us9dxL3uDktUPd2CpXjM0d1aR");
+    $cmd = "/usr/bin/chromium-browser --headless --disable-gpu --print-to-pdf='".$filepath."' ".$url;
+    $last_line = system($cmd, $result);
+
+    if ( $result === 0) {
+        if (file_exists($filepath)) {
+            $url = asset(Storage::url($directory."/".$file));
+            $response = ['RESULT'=>true, 'MESSAGE'=>'', 'DATA'=> $url];
+        }
+    }
+  ```
+
+----
+
 * create cache
   ```
   artisan config:cache
