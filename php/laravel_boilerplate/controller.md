@@ -1,6 +1,6 @@
 ```
-if (!$request::ajax()) {
-    $segment = $request::route()->getPrefix();
+if (!$request->ajax()) {
+    $segment = $request->route()->getPrefix();
     return view($segment."user.index");
 }
 
