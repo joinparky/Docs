@@ -1,0 +1,26 @@
+        $('body').on('click', '.btnCreate', function() {
+            var button = $(this);
+            var id = button.data("id");
+            if (id < 1) return false;
+            $.ajax({
+                url: urlprefix + "/remakeReport/" + id,
+                type: 'GET', async: true,
+                /*data: {_method: 'PUT', data: data},*/
+                beforeSend: function (xhr) {
+                    button.prop("disabled", true);
+                }
+            })
+            .done(function(data) {
+                if (data.RESULT) {
+                    alert("요청이 완료되었습니다.");
+                } else {
+                    alert(data.MESSAGE);
+                }
+            })
+            .fail(function(data) {
+                alert(data.MESSAGE);
+            })
+            .always(function(data) {
+                button.prop("disabled",false);
+            });
+        });
