@@ -69,6 +69,13 @@
   * add require "laravelcollective/html":"^5.4.0"
   * update composer
   * add providers 'config/app.php'
+    ```
+        Collective\Html\HtmlServiceProvider::class,
+        App\Providers\FormMacroServiceProvider::class,
+        
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+    ```
   * ./app/Providers/FormMacroServiceProvider.php
 
 ----
