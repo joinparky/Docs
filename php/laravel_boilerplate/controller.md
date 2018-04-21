@@ -10,7 +10,7 @@ try {
     $statusCode = 200;
 
     $now = Carbon::now();
-    $user = User::find($id)
+    $user = User::find($id);
     $result = $user->update('level','1');
 
     if ($result) {
