@@ -1,13 +1,13 @@
         $('body').on('click', '.btnCreate', function() {
             var button = $(this);
-            var buttonText = $(this).text();
+            var buttonText = button.text();
             var id = button.data("id");
             if (id < 1) return false;
             $.ajax({
                 url: urlprefix + "/remakeReport/" + id, type: 'GET', async: true,
                 /*data: {_method: 'PUT', data: data},*/
                 beforeSend: function (xhr) {
-                    button.text('Loading...').prop("disabled", true);
+                    button.text('실행중...').prop("disabled", true);
                 }
             })
             .done(function(data) {
