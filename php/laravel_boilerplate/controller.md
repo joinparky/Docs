@@ -14,7 +14,7 @@ try {
     $result = $user->update('level','1');
 
     if ($result) {
-        $response['MESSAGE'] = '';
+        $response = ['RESULT'=> true, 'MESSAGE'=>''];
         DB::commit();
     } else {
         DB::rollBack();
