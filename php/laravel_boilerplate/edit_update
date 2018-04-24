@@ -1,0 +1,63 @@
+@foreach (['success', 'info','warning', 'danger'] as $msg)
+    @if(Session::has('alert-' . $msg))
+        <div class="alert alert-{{$msg}}" role="alert">
+            {{ Session::get('alert-'.$msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+    @endif
+@endforeach
+
+<form method="post" action="{{URL::to('/user')}}{{ isset($user->id) ? '/'.$user->id : '' }}" class="form-horizontal">
+{{ csrf_field() }}
+@if (isset($user)) {{ method_field('PUT') }} @endif
+</form>
+
+----
+
+$messages = [ 
+    'login_id' => 'required|min:3|max:20|unique:users' ,//아이디
+    'login_id.required' => '아이디를 입력하여 주십시오.',
+    'login_id.min' => '아이디를 3자이상 입력하여 주십시오.',
+    'login_id.max' => '아이디를 20자이하로 입력하여 주십시오.',
+    'login_id.unique' => '이미 사용중인 아이디입니다.',
+    'name.required' => '이름을 입력하여 주십시오.',
+    'email' => 'required|email|unique:users',//이메일
+    'email.required' => '이메일을 입력하여 주십시오.',
+    'email.email' => '이메일을 형식에 맞게 입력하여 주십시오.',
+    'email.unique' => '이미 사용중인 이메일입니다.',
+];  
+$rules = [ 
+    /*'name' => 'required|max:20',
+    'email' => 'required|email|max:255|unique:users',
+    'password' => 'required|min:6|confirmed',*/
+    'login_id' => 'required|min:3|max:20|unique:users' ,//아이디
+    //'password' => 'required|min:6|confirmed' ,//비밀번호
+    'name' => 'required',//이름
+    'email' => 'required|email|unique:users',//이메일
+];  
+$this->validate($request, $rules, $messages);
+
+
+DB::beginTransaction();
+$result = false;
+
+$user = User::find($id);
+$user->name = $request->name;
+if ( $user->save() ) {
+    foreach ($request->role as $k => $v) {
+        $result = UserRole::find($v)
+            ->update([ 'name' => $request->rolename[$k] , 'type' => $request->roletype[$k] ] );
+        if (!$request) break;
+    }
+}
+
+if ($result) {
+    DB::commit();
+    $request->session()->flash('alert-success', '수정되었습니다.');
+} else {
+    DB::rollBack();
+    $request->session()->flash('alert-danger', '수정되지않았습니다.');
+}
+
+return redirect('user/'.$user->id.'/edit');
+
+
