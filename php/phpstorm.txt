@@ -22,6 +22,8 @@
     * Document root
 
 * External connections
+  * 'Languages & Frameworks > PHP > Debug'
+  * Start Listening
   * unchecked - Break at first line in PHP scripts
 
 * VCRUNTIME140.dll 오류 
