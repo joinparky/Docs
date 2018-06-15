@@ -9,7 +9,17 @@
   * Settings > Editor > Color Scheme > Solarized Dark
   
 * artisan
-  * 'Tools > Command Line Tool Support' Tool based on Symfony Console
+  * 'Tools > Command Line Tool Support' 
+    * Choose tool: Tool based on Symfony Console
+    * Alias: artisan
+    * phar or php script
+      * Path to PHP executable: E:\php\php-7.1.16-nts-Win32-VC14-x64\php.exe 
+      * Path to script: E:\workspace\ysnet\druwa\artisan 
+
+* PHP Built-in Web Server
+  * 'Run > Edit Configurations...'
+  * '+ > PHP Built-in Web Server'
+    * Document root
 
 * External connections
   * unchecked - Break at first line in PHP scripts
@@ -19,3 +29,4 @@
   * VC14 는 Microsoft Visual C++ 2015 버전으로 컴파일 
   * Visual Studio 2015용 Visual C++ 재배포 가능 패키치를 다운 받아 설치
   * https://www.microsoft.com/ko-kr/download/confirmation.aspx?id=48145
+
