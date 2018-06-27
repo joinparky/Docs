@@ -1,0 +1,19 @@
+grant all privileges on druwa.* to 'development'@'localhost' identified by '';
+grant all privileges on druwa.* to 'development'@'1.227.164.28' identified by '';
+grant all privileges on druwa.* to 'development'@'223.33.%' identified by '';
+grant all privileges on druwa.* to 'development'@'223.39.%' identified by '';
+grant all privileges on druwa.* to 'development'@'223.62.%' identified by '';
+
+
+
+* user
+    * 클래스명: StudlyCase, 단수형
+      str_singular(studly_case('user'))
+    * 테이블명: snake_case, 복수형
+      str_plural(snake_case('user'))
+
+    artisan make:controller UserController --resource
+    Route::resource('/user', 'UserController');
+    artisan make:model User
+    artisan make:seeder UsersTableSeeder
+    artisan make:request StoreUser // Form Request 유효성 검사
