@@ -96,7 +96,8 @@
     ```
     artisan make:middleware AuthenticateWithLevel
     ```
-  * make middleware -> 미들웨어 키등록(Kernel.php) -> 라우트에서 미들웨어 키 사용
+  * make middleware -> 미들웨어 키등록(/app/Http/Kernel.php) -> 라우트에서 미들웨어 키 사용
+    * 'auth.level' => \App\Http\Middleware\AuthenticateWithLevel::class,
 
 ----
 
