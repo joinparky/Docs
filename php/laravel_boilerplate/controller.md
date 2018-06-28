@@ -4,10 +4,12 @@ if (!$request->ajax()) {
     return view($segment."user.index");
 }
 
+$response = ['RESULT'=>false, 'MESSAGE'=>'오류가 발생하였습니다.'];
+$statusCode = 200;
+
 try {
     DB::beginTransaction();
-    $response = ['RESULT'=>false, 'MESSAGE'=>'오류가 발생하였습니다.'];
-    $statusCode = 200;
+
 
     $now = Carbon::now();
     $user = User::find($id);
