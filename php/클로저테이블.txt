@@ -1,0 +1,115 @@
+
+
+create database sqlantipatterns;
+grant all privileges on sqlantipatterns.* to development@'localhost' identified by 'xnrpejaktdlTdj';
+
+use sqlantipatterns;
+create table comments (
+    comment_id serial primary key,
+    bug_id bigint unsigned not null,
+    author bigint unsigned not null,
+    comment_date datetime not null,
+    comment text not null
+    -- foreign key (bug_id) references bugs(bug_id),
+    -- foreign key (author) references accounts(account_id)
+);
+insert into comments values 
+(1, 1, 1, NOW(), 'comment 1')
+,(2, 1, 1, NOW(), 'comment 2')
+,(3, 1, 1, NOW(), 'comment 3')
+,(4, 1, 1, NOW(), 'comment 4')
+,(5, 1, 1, NOW(), 'comment 5')
+,(6, 1, 1, NOW(), 'comment 6')
+,(7, 1, 1, NOW(), 'comment 7');
+
+
+
+create table treepaths (
+    ancestor bigint unsigned not null,
+    descendant bigint unsigned not null,
+    primary key (ancestor, descendant),
+    foreign key (ancestor) references comments(comment_id),
+    foreign key (descendant) references comments(comment_id)
+);
+insert into treepaths values 
+(1, 1) ,(1, 2) ,(1, 3) ,(1, 4) ,(1, 5) ,(1, 6) ,(1, 7)
+    , (2, 2) , (2, 3)
+    , (3, 3)
+    , (4, 4) , (4, 5) , (4, 6) , (4, 7)
+    , (5, 5)
+    , (6, 6) , (6, 7)
+    , (7, 7);
+
+
+drop table treepaths;
+create table treepaths (
+    ancestor bigint unsigned not null,
+    descendant bigint unsigned not null,
+    path_length bigint unsigned not null,
+    primary key (ancestor, descendant),
+    foreign key (ancestor) references comments(comment_id),
+    foreign key (descendant) references comments(comment_id)
+);
+insert into treepaths values 
+(1, 1, 0) 
+    ,(1, 2, 1) 
+        ,(1, 3, 2) 
+    ,(1, 4, 1) 
+        ,(1, 5, 2) 
+        ,(1, 6, 2) 
+            ,(1, 7, 3)
+    , (2, 2, 0) 
+        , (2, 3, 1)
+    , (3, 3, 0)
+    , (4, 4, 0) 
+        , (4, 5, 1) 
+        , (4, 6, 1) 
+            , (4, 7, 2)
+    , (5, 5, 0)
+    , (6, 6, 0) 
+        , (6, 7, 1)
+    , (7, 7, 0)
+;
+
+-- 답글 4의 자손
+select c.*, t.*,
+    (select ancestor from treepaths where path_length = 1 and descendant = t.descendant) parent_id
+from comments as c 
+    join treepaths as t on c.comment_id = t.descendant
+where t.ancestor = 4 
+;
+SELECT
+    node.`comment_id`,
+    CONCAT( REPEAT('-', path.`path_length`), node.`comment`) AS name,
+    path.`path_length`,
+    GROUP_CONCAT( crumbs.`ancestor` SEPARATOR ',') AS breadcrumbs
+FROM
+	`comments` AS node
+    JOIN `treepaths` AS path ON node.`comment_id` = path.`descendant`
+    JOIN `treepaths` AS crumbs ON crumbs.`descendant` = path.`descendant`
+WHERE path.`ancestor` = 4
+GROUP BY node.`comment_id`
+ORDER BY breadcrumbs ;
+
+
+
+-- 답글 6의 조상
+select c.*, t.*
+from comments as c 
+    join treepaths as t on c.comment_id = t.ancestor
+where t.descendant = 6 ;
+
+
+-- 답글 5의 새로운 자식 추가
+insert into comments values (8, 1, 1, NOW(), 'comment 8');
+insert into treepaths (ancestor, descendant, path_length)
+    select 
+        t.ancestor, 8, path_length + 1
+    from treepaths as t
+    where t.descendant = 5
+    union all
+    select 8, 8, 0;
+
+/* 참고쿼리
+select count(*) from treepaths where ancestor in (select t.ancestor from treepaths as t where t.descendant = 5) group by ancestor;
+*/
