@@ -126,4 +126,5 @@
   * 저장
     * form summit and ajax, validation, fileupload,  트랜잭션 처리
   * form macro -> 요약문서
+  * menu macro -> 요약문서
 
