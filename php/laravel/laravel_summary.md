@@ -36,6 +36,7 @@
 
 * form macro
   * make checkbox, radio, select
+  * /app/Providers/FormMacroServiceProvider.php
   * https://laravelcollective.com/docs/5.4/html
   * vi composer.json
   * add require "laravelcollective/html":"^5.4.0"
@@ -48,8 +49,15 @@
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
     ```
-  * /app/Providers/FormMacroServiceProvider.php
+----
 
+* menu macro
+  * artisan make:provider MenuServiceProvider
+  * /app/Providers/MenuServiceProvider.php
+  * add providers '/config/app.php'
+    ``` 
+    App\Providers\MenuServiceProvider::class,
+    ``` 
 ----
 
 * 권한확인-Authorization
@@ -263,3 +271,4 @@
 * db debugging
   * /vendor/laravel/framework/src/Illuminate/Database/Connection.php
     * $loggingQueries = true;
+   
