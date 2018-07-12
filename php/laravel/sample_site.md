@@ -22,17 +22,25 @@
     ```
 
 * setting laravel
-  * setting db
+  * setting .env
     ```
     vi .env
         DB_DATABASE=lrvsample
         DB_USERNAME=development
         DB_PASSWORD=
+
+        APP_NAME=Laravel
+        APP_ENV=local //staging, production
+        APP_DEBUG=true //production false
+        APP_URL=http://localhost
+
+        LOG_CHANNEL=stack //production daily
     ```
-  * change timezone
+  * change app
     ```
-    /config/app.php
+    vi /config/app.php
     'timezone' => 'Asia/Seoul',
+    'locale' => 'ko',
     ```
   * storage 퍼미션
     ```
