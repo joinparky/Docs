@@ -32,3 +32,12 @@
   * Visual Studio 2015용 Visual C++ 재배포 가능 패키치를 다운 받아 설치
   * https://www.microsoft.com/ko-kr/download/confirmation.aspx?id=48145
 
+* Setting up PhpStorm for laravel with autocompletion
+  * composer require  barryvdh/laravel-ide-helper
+  * add providers /config/app.php 
+    * Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+  * ide 헬퍼 생성
+    * artisan ide-helper:generate
+  * ref 
+    * https://medium.com/@sorravitbunjongpean/using-phpstorm-with-laravel-with-autocompletion-ef73c4d5a740
+    * https://www.lesstif.com/pages/viewpage.action?pageId=29590101
