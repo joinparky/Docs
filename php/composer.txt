@@ -25,11 +25,11 @@
   * require '../vendor/autoload.php';
   
 * 글로벌 저장소 변경
-  * composer config -g repositories.packagist composer http://packagist.jp
+  * composer config -g repositories.packagist composer https://packagist.jp
 
 * 저장소 변경
-  * composer config repositories.packagist composer http://packagist.jp
-  * E:\php\php-7.1.16-nts-Win32-VC14-x64\php.exe E:\workspace\obpark\lrvsample\composer.phar config repositories.packagist composer http://packagist.jp
+  * composer config repositories.packagist composer https://packagist.jp
+  * E:\php\php-7.1.16-nts-Win32-VC14-x64\php.exe E:\workspace\obpark\lrvsample\composer.phar config repositories.packagist composer https://packagist.jp
 
 * 기본설정으로 초기화
   * composer config -g --unset repositories.packagist
