@@ -166,7 +166,18 @@
     * https://myaccount.google.com/security#connectedapps
     * 보안 수준이 낮은 앱 허용: 사용
     * vi .env 
+
+----
     
+* Queues, Scheduling 공통점
+  * 비동기로 시간이 요구되는 작업을 처리 
+
+* Queues, Scheduling 차이
+  * Queues: event가 발생하여 생성된 작업 처리 
+    * ex) 회원이 패스워드를 찾기를 하면 메일 발송
+  * Scheduling(Cron): 정기적인 작업 처리 
+    * ex) 탈퇴한 회원을 매월 db에서 정리
+
 ----
 
 * Job & Queue
@@ -305,3 +316,4 @@
   ```
 
 ----
+
