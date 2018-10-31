@@ -1,0 +1,23 @@
+
+* Linux 인스턴스의 사용자 계정 관리
+  https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/managing-users.html
+
+* ec2 생성시 기본 username?
+  각 Linux 인스턴스 유형은 기본 Linux 시스템 사용자 계정으로 시작됩니다. 
+  Amazon Linux 2 또는 Amazon Linux의 경우 사용자 이름은 ec2-user입니다. Centos의 경우 사용자 이름은 centos입니다. 
+  Debian의 경우 사용자 이름은 admin 또는 root입니다. 
+  Fedora의 경우 사용자 이름은 ec2-user 또는 fedora입니다. 
+  RHEL의 경우 사용자 이름은 ec2-user 또는 root입니다. 
+  SUSE의 경우 사용자 이름은 ec2-user 또는 root입니다. 
+  Ubuntu의 사용자 이름은 ubuntu입니다. 
+  ec2-user 및 root를 사용할 수 없는 경우 AMI 공급자에게 문의하십시오.
+
+* 인스턴스의 키 페어 추가 또는 교체  
+  * https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-key-pairs.html#replacing-key-pair
+
+* amazon linux install php7.2 
+  https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html
+  sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+  yum --enablerepo=remi-php72 install php-gmp
+  /usr/local/bin/composer.phar require achse/geth-jsonrpc-php-client 
+
