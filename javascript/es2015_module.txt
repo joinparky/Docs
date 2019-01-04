@@ -1,0 +1,57 @@
+* ES2015(ES6) 모듈 시스템
+
+* ES2015에서는 파일 최상단에 명시적으로 필요한 파일들을 선언
+  * Node.js에서 require와 같음, Node.js는 아직 ES2015 모듈 시스템을 지원하지 않음
+  ex) 
+    * ReactJS를 사용하고 싶을 때 파일 최상단에 import라고 선언
+      import React from 'react';
+      import { render } from 'react-dom';
+    * 이제부터 이 파일은 React와 render라는 변수를 사용할 수 있음
+
+--
+
+* export 방식의 차이
+  * React vs { render } 
+  * 모듈을 불러올 때 import
+  * 모듈을 다른 파일로 보내려면 export라고 선언
+  ex) 
+    Example.js
+      const a = 1;
+      const b = 2;
+      export { a };
+      export const c = 3;
+      export default b;
+    * Example.js에서 세 가지 방식으로 export
+      * 변수 a는 객체에 담아서 export
+      * 상수 c는 선언 및 초기화와 동시에 바로 export 
+      * 변수 b는 독특하게 앞에 default라는 키워드를 붙인 채 export
+
+    Example2.js
+      import d, { a, c as e } from './Example';
+      console.log(a, d, e); // 1, 2, 3
+    * Example2.js에서 Example 파일을 import(js는 생략가능) 
+      * d는 괄호 없이 import 
+        * default로 export한 b는 변수명을 마음대로 괄호를 사용하지 않아도 import할 수 있음
+        * 변수 d가 바로 변수 b를 import
+      * a, c는 괄호 안에서 import 
+        * a와 c는 export할 때 이름 그대로 import
+      * c는 뒤에 as e
+        * 괄호 안의 변수도 이름을 바꾸고 싶다면, as 라는 키워드를 사용해 바꿀 수 있음
+
+--
+
+* '*' export한 모든 것을 다 모아서 import 해줌 
+  ex) 
+    Example3.js
+      import * as namespace from './Example';
+      console.log(namespace); // { a: 1, c: 3, default: 2 }
+
+    * default도 객체의 멤버로 포함 
+
+--
+
+* 참고로 어떤 값(숫자, 문자열, 불린, 객체, 배열, 함수 등 전달할 수 있는 값)이든 다 export, import 가능
+* 모듈은 아직 대다수의 브라우저에서 지원하지 않기 때문에 BabelJS 같은 컴파일러를 사용해서 ES5 스타일로 변경해야 함
+
+
+https://www.zerocho.com/category/ECMAScript/post/579dca4054bae71500727ab9
