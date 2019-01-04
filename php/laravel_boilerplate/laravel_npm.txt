@@ -1,0 +1,12 @@
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
+# sudo apt-get install -y npm //설치안해되됨
+npm -v
+
+npm install vuetify --save
+
+https://laravel.kr/docs/5.6/mix
+
+npm run watch
+npm run development
