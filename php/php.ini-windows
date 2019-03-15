@@ -1,3 +1,5 @@
+extension_dir = "ext"
+
 extension=curl
 extension=fileinfo
 extension=gd2
