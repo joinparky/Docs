@@ -38,6 +38,8 @@
     * Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
   * ide 헬퍼 생성
     * artisan ide-helper:generate
+    * artisan ide-helper:models 
+    * artisan ide-helper:meta
   * ref 
     * https://medium.com/@sorravitbunjongpean/using-phpstorm-with-laravel-with-autocompletion-ef73c4d5a740
     * https://www.lesstif.com/pages/viewpage.action?pageId=29590101
